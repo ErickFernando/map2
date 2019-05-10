@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import loadGoogleMapsAPI from 'load-google-maps-api'; // Única dependencia extra
+//import loadGoogleMapsAPI from 'load-google-maps-api'; // Única dependencia extra
 import googleDistanceMatrix from 'google-distance-matrix';
 // es muy importante añadirle height y width!!!
-const MAP_STYLES = {
+/*const MAP_STYLES = {
   height: '450px',
   width: '100%'
 };
@@ -19,9 +19,9 @@ const OPTIONS = {
 const API_CONFIG = {
   key: 'AIzaSyBbLdWaiwLMnVTLMsE6-4xXj_t13N3vumA',
   language: 'es'
-};
+};*/
 var origins = ['Polígono Industrial Argualas, 38, 50012 Zaragoza'];
-var destinations = ['Calle Pontevedra, 23, 50007 Zaragoza'];
+var destinations = ['Calle Moriones, 4, 50006 Zaragoza'];
 /*var destinationIcon = 'https://chart.googleapis.com/chart?' +
 'chst=d_map_pin_letter&chld=D|FF0000|000000';
 var originIcon = 'https://chart.googleapis.com/chart?' +
@@ -54,6 +54,7 @@ export default class CustomMap extends Component {
     });*/
     googleDistanceMatrix.key('AIzaSyBRpSIG850AkLVFgrhbHoqAUjdgs1nUzps');
     googleDistanceMatrix.units('imperial')
+    //console.log(googleDistanceMatrix, "  asd")
     //console.log(googleDistanceMatrix , "    sdfsd")
     googleDistanceMatrix.matrix(origins, destinations,  (err, distances)=> {
       if (err) {
@@ -62,12 +63,12 @@ export default class CustomMap extends Component {
       if (!distances) {
         return console.log('no distances');
       }
-      if (distances.status == 'OK') {
+      if (distances.status=== 'OK') {
         for (let i = 0; i < origins.length; i++) {
           for (let j = 0; j < destinations.length; j++) {
             let origin = distances.origin_addresses[i];
             let destination = distances.destination_addresses[j];
-            if (distances.rows[0].elements[j].status == 'OK') {
+            if (distances.rows[0].elements[j].status === 'OK') {
               let distance = distances.rows[i].elements[j].distance.text;
               console.log('Distance from ' + origin + ' to ' + destination + ' is ' + distance);
             } else {
@@ -84,7 +85,7 @@ export default class CustomMap extends Component {
 
   render() {
     return (
-      <div ref="map" style={MAP_STYLES}></div>
+      <div ref="map" ></div>
     )
   }
 }
